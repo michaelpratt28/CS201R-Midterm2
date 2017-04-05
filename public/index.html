@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>General Conference Database</title>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+</head>
+
+<body ng-app="GCApp" ng-controller="GCController">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-messages.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-aria.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+    <script src="javascripts/app.js"></script>
+
+    <div ng-form="gcForm" layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Session</label>
+            <input name="session" ng-model="newGC.session" required md-no-asterisk>
+
+            <div ng-messages="gcForm.session.$error" role="alert" multiple>
+                <div ng-message="required" class="required">Required</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Speaker</label>
+            <input name="speaker" ng-model="newGC.speaker" required md-no-asterisk>
+
+            <div ng-messages="gcForm.speaker.$error" role="alert" multiple>
+                <div ng-message="required" class="required">Required</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Title</label>
+            <input name="title" ng-model="newGC.title" required md-no-asterisk>
+
+            <div ng-messages="carForm.title.$error" role="alert" multiple>
+                <div ng-message="required" class="required">Required</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Image URL</label>
+            <input name="imageUrl" ng-model="newGC.imageUrl" required md-no-asterisk>
+
+            <div ng-messages="gcForm.imageUrl.$error" role="alert" multiple>
+                <div ng-message="required" class="required">Required</div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout-gt-sm="row">
+        <md-button ng-click="addGC()">Add Talk</md-button>
+    </div>
+
+    <div ng-repeat="gc in gcs | orderBy: '-upvotes'">
+        <md-card>
+            <img ng-src="{{gc.imageUrl}}" class="md-card-image" alt="Car Info">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{gc.speaker}} {{gc.title}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button>+ 1</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+</body>
+
+</html>
